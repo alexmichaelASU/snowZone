@@ -1,38 +1,65 @@
+<div class="mainContainer">
+	<header class="logoReal">
+		<a>
+			<img src='../assets/smallsnow.jpg' alt="image not loaded">
+			<!-- use router link to link back to home page when clicked -->
+		</a>
+	</header>
+	<header class="logoHeader">
+		<div style="grid-column: 1;"></div> <!-- Empty space on the left -->
+		<div style="grid-column: 2; justify-content: center;">
+			
+		</div>
+		<div style="grid-column: 3; display: flex; justify-content: flex-end;">
+			<a style="margin-right: 30px;">
+				<img src='../assets/cart.png' alt="image not loaded">
+				<!-- use router link to link back to cart when clicked -->
+			</a>
+			<a style="margin-right: 20px;">
+				<img src='../assets/loginLogo.png' alt="image not loaded">
+				<!-- use router link to link back to login page when clicked -->
+			</a>
+		</div>
+	</header>
+
 <div class="container">
-  <header class="logoHeader">
-	
-	<a>
-		<img src='../assets/smallsnow.jpg' alt="image not loaded">
-		<!-- use router link to link back to home page when clicked-->
-	</a>
-	<a>
-		<img src='../assets/cart.png' alt="image not loaded">
-		<!-- use router link to link back to cart when clicked-->
-	</a>
-	
-	<a>
-		<img src='../assets/loginLogo.png' alt="image not loaded">
-		<!-- use router link to link back to login page when clicked-->
-	</a>
+  
 
-  </header>
-
-  <header class="secondHeader">  
-	<ul>
-		<!--add drop down menus in the future-->
-		<li>Snowboarding</li>
-		<li>Skiing</li>
-		<li>Snow Clothing</li>
-	</ul>
-  </header>
+  <header class="secondHeader"><app-second-header></app-second-header></header>
   
   <main class="mainContent">
-    different components
-	
+	<ul>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		<li>test</li>
+		
+	</ul>
+	<router-outlet />
   </main>
-
-  <footer> foot</footer>
+  <footer class="footer"><app-footer></app-footer></footer>
+  
+</div>
 </div>
 
-<router-outlet />
 

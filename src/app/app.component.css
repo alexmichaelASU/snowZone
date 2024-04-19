@@ -1,21 +1,58 @@
-.container {
+.mainContainer {
+  height: 100%;
+  margin-bottom: 10px;
+  overflow-y: scroll; 
+  overflow-x: hidden; 
   
-  position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-
+}
+.logoReal {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   background-color: white;
-  height: 95%;
-  width: 85%;
-  
-  border-radius: 20px;
-  
+  height: 7%;
+}
+.logoHeader {
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Defines three columns: left empty, center logo, right icons */
+  justify-content: space-between; /* Spaces the items evenly */
+  align-items: center; /* Centers items vertically */
+  background-color: white;
+  
+  height: 6%;
 }
 
 
-.logoHeader {
-	display: flex;
-	justify-content: center;
+
+.container {
+  position: relative;
+  top: 560px;
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  overflow: auto; 
+  scrollbar-width: none;
+  background: linear-gradient(to right, lightblue, #FFCCCB);
+  height: 100%; 
+  width: 85%; 
+  
+  border-radius: 20px;
+  display: flex; 
+  flex-direction: column; 
+}
+
+.mainContent {
+  
+  padding: 10px; 
+}
+
+
+
+.footer {
+  display: flex;
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid white;
 }
