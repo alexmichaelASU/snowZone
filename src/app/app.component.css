@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+html {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.example-card {
+  max-width: 300px;
+  margin: 20px;
+  
+
+}
+
+.example-header-image {
+  background-image: url('../assets/testSnowboard.png');
+  background-size: cover;
+}
 .mainContainer {
   height: 100%;
   margin-bottom: 10px;
@@ -14,9 +30,9 @@
 }
 .logoHeader {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Defines three columns: left empty, center logo, right icons */
-  justify-content: space-between; /* Spaces the items evenly */
-  align-items: center; /* Centers items vertically */
+  grid-template-columns: 1fr 1fr 1fr; 
+  justify-content: space-between; 
+  align-items: center; 
   background-color: white;
   
   height: 6%;
@@ -43,6 +59,9 @@
 .mainContent {
   
   padding: 10px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
