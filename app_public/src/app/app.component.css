@@ -3,17 +3,7 @@ html {
   font-family: 'Courier New', Courier, monospace;
 }
 
-.example-card {
-  max-width: 300px;
-  margin: 20px;
-  
 
-}
-
-.example-header-image {
-  background-image: url('../assets/testSnowboard.png');
-  background-size: cover;
-}
 .mainContainer {
   height: 100%;
   margin-bottom: 10px;
