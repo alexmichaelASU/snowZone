@@ -24,11 +24,11 @@ app.set('view engine', 'pug');
 // Middleware setup
 app.use(logger('dev'));
 app.use(express.json());
-
+app.use('/uploads', express.static('uploads'));
 
 app.use(express.static(path.join(__dirname, 'app_public', 'dist', 'snow-zone', 'browser')));
 
-// Routes setup
+// Routes setup 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 

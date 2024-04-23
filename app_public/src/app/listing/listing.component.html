@@ -1,1 +1,52 @@
-<p>listing works!</p>
+<form class="listing-form">
+    <!-- Theme Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Theme (Snowboard, Ski, Clothing)</mat-label>
+        <input matInput required name="theme" placeholder="Ex. Snowboard, Ski, Clothing">
+    </mat-form-field>
+
+    <!-- Product Name Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Product Name</mat-label>
+        <input matInput required name="name" placeholder="Ex. Snowboard" unique>
+    </mat-form-field>
+
+    <!-- Condition Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Condition</mat-label>
+        <input matInput name="condition" placeholder="Ex. New, Used">
+    </mat-form-field>
+
+    <!-- Description Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput name="description" placeholder="Ex. A great snowboard for beginners"></textarea>
+    </mat-form-field>
+
+    <!-- Price Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" required name="price" placeholder="Ex. 299.99">
+    </mat-form-field>
+
+    <!-- Manufacturer Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Manufacturer</mat-label>
+        <input matInput required name="manufacturer" placeholder="Ex. Burton">
+    </mat-form-field>
+
+    <!-- Size Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Size</mat-label>
+        <input matInput required name="size" placeholder="Ex. Medium, Large">
+    </mat-form-field>
+
+    <!-- Color Input -->
+    <mat-form-field class="listing-full-width">
+        <mat-label>Color</mat-label>
+        <input matInput required name="color" placeholder="Ex. Red, Blue">
+    </mat-form-field>
+
+    
+</form>
+
