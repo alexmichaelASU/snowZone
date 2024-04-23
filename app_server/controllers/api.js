@@ -1,5 +1,5 @@
 const Product = require('../models/Product.js');
-
+const fs = require('fs');
 //used for uploading and storing images
 
 
@@ -33,49 +33,65 @@ exports.createProduct = async (req, res, next) => {
         // Create a new product using the request body
         const productData = req.body;
         
-        // If an image file was uploaded, set the productImage field
+        //sets the productImage field
         if (req.file) {
             productData.productImage = req.file.path;
         }
         
-        // Create a new product instance with the provided data
         const newProduct = new Product(productData);
         
-        // Save the new product to the database
         const savedProduct = await newProduct.save();
         
-        // Respond with the saved product
+        //responds with the saved product
         res.status(201).json(savedProduct);
     } catch (error) {
-        // Handle unique constraint error for product name
+        // handles unique constraint error for product name
         if (error.code === 11000) {
             return res.status(400).json({ message: 'Product name must be unique' });
         }
-        // Forward other errors to the error handler
         next(error);
     }
 };
+
 //Used for post request, edits a product
 exports.updateProduct = async (req, res, next) => {
     try {
-        // Check if an image file was uploaded and set the productImage field accordingly
+        //checks if a new image file was uploaded
         if (req.file) {
-            // Update the req.body object with the path of the uploaded file
-            req.body.productImage = req.file.path;
+            //stores path of the new image
+            const newImagePath = req.file.path;
+            
+            //finds the product by ID and retrieve the existing product details
+            const existingProduct = await Product.findById(req.params.id);
+
+            if (!existingProduct) {
+                return res.status(404).json({ message: 'Product not found' });
+            }
+
+            //checks if the new image is different from the existing image
+            if (existingProduct.productImage && existingProduct.productImage !== newImagePath) {
+                //deletes the existing image file
+                fs.unlink(existingProduct.productImage, (err) => {
+                    if (err) {
+                        console.error('Error deleting existing image:', err);
+                    }
+                });
+            }
+
+            //updatse the product image path in the request body
+            req.body.productImage = newImagePath;
         }
 
-        // Find the product by ID and update it with the new data from req.body
+        //updates the product with the new data from req.body
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
-        // If the product is not found, return a 404 error
         if (!updatedProduct) {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        // Respond with the updated product
+        //responds with the updated product
         res.status(200).json(updatedProduct);
     } catch (error) {
-        // Forward the error to the error handler
         next(error);
     }
 };
@@ -83,10 +99,21 @@ exports.updateProduct = async (req, res, next) => {
 //Used for delete request, deletes a product by id
 exports.deleteProduct = async (req, res, next) => {
     try {
+        // find the product by ID and delete it
         const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+
         if (!deletedProduct) {
             return res.status(404).json({ message: 'Product not found' });
         }
+		//grabs image path for deletion
+        const imagePath = deletedProduct.productImage;
+
+        // deletes the image file
+        fs.unlink(imagePath, (err) => {
+            if (err) {
+                console.error('Error deleting image:', err);
+            }
+        });
         res.status(204).end();
     } catch (error) {
         next(error);

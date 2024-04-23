@@ -18,14 +18,11 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
     // Reject anything that is not PNG or JPEG
-    cb(null, true); 
-    /** 
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-        
+        cb(null, true);
     } else {
         cb(new Error('image not jpeg or png'), false); 
     }
-    */
 };
 
 const upload = multer({ 

@@ -1,3 +1,7 @@
+<------- Senior Capstone ------->
+
+		SnowZoneNC
+CraigsList like used snow gear reseller
 
 
 " git clone -> npm start" 
