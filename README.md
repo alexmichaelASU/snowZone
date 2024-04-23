@@ -1,4 +1,3 @@
-Senior Project - SnowZone
 
 
 " git clone -> npm start" 
