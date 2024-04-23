@@ -7,10 +7,12 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, './uploads/');
     },
     filename: function(req, file, cb) {
-        cb(null, new Date().toISOString() + file.originalname);
+		const now = new Date().toISOString(); 
+		const date = now.replace(/:/g, '-'); 
+		cb(null, date + file.originalname);
     }, 
 });
 
@@ -30,7 +32,7 @@ const upload = multer({
 
     storage: storage, 
     limits: {
-        fileSize: 1024 * 1024 * 5
+        fileSize: 1024 * 1024 * 3
     },
     fileFilter: fileFilter,
 });
