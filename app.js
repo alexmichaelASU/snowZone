@@ -1,5 +1,7 @@
 // app.js
+
 const express = require('express');
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -24,14 +26,14 @@ app.set('view engine', 'pug');
 // Middleware setup
 app.use(logger('dev'));
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+
 
 app.use(express.static(path.join(__dirname, 'app_public', 'dist', 'snow-zone', 'browser')));
 
 // Routes setup 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
-
+app.use('/uploads', express.static('uploads'));
 app.get('*', (req, res, next) => {
     if (req.path !== '/api') {
       res.sendFile(path.join(__dirname, 'app_public', 'dist', 'snow-zone', 'browser', 'index.html'));

@@ -29,6 +29,7 @@ exports.getProductById = async (req, res, next) => {
 //Used for post request , creates a product
 exports.createProduct = async (req, res, next) => {
     try {
+        console.log(req.file);
         // Create a new product using the request body
         const productData = req.body;
         
