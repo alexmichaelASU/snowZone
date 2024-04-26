@@ -1,0 +1,76 @@
+<div class="mainContent">
+
+    <div class="filter">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Filter SnowGear
+                    </mat-panel-title>
+                    
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                    <mat-label>Manufacturer</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
+                            {{ manufacturer }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <!-- Condition dropdown -->
+                <mat-form-field>
+                    <mat-label>Condition</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let condition of conditions" [value]="condition">
+                            {{ condition }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <!-- Color dropdown -->
+                <mat-form-field>
+                    <mat-label>Color</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let color of colors" [value]="color">
+                            {{ color }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <!-- Size dropdown -->
+                <mat-form-field>
+                    <mat-label>Size</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let size of sizes" [value]="size">
+                            {{ size }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div class="content">
+        <ng-container *ngFor="let product of products$ | async">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>{{ product.name }}</mat-card-title>
+                    <mat-card-subtitle>{{ product.manufacturer }}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image [src]="product.productImage" [alt]="'Photo of ' + product.name">
+                <mat-card-content>
+                    <p>Price: ${{ product.price }}.00</p>
+                    <p>Size: {{ product.size }} cm</p>
+                    <p>Color: {{ product.color }}</p>
+                    <p>Condition: {{ product.condition }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button >LIKE</button>
+                    <button mat-button [routerLink]="['/single', product._id]" routerLinkActive="active">DETAILS</button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </div>
+    
+</div>

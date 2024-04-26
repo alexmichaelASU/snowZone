@@ -35,11 +35,12 @@ const upload = multer({
 });
 
 
-
+router.get('/products/theme/:theme', apiController.getProductsByTheme);
 router.get('/products', apiController.getAllProducts);
 router.get('/products/:id', apiController.getProductById);
 router.post('/products', upload.single('productImage'), apiController.createProduct);
 router.put('/products/:id', upload.single('productImage'),  apiController.updateProduct);
 router.delete('/products/:id', apiController.deleteProduct);
+router.delete('/products', apiController.deleteAllProducts);
 
 module.exports = router;

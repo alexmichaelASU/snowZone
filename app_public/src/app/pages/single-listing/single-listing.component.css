@@ -1,0 +1,6 @@
+.example-card {
+    max-width: 450px;
+    margin: 20px;
+    
+    box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);
+}

@@ -26,6 +26,23 @@ exports.getProductById = async (req, res, next) => {
     }
 };
 
+//Used for getting products by a certain theme
+exports.getProductsByTheme = async (req, res, next) => {
+    try {
+        const theme = req.params.theme;
+
+        const products = await Product.find({ theme });
+
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found with the specified theme' });
+        }
+
+        res.status(200).json(products);
+    } catch (error) {
+        next(error);
+    }
+};
+
 //Used for post request , creates a product
 exports.createProduct = async (req, res, next) => {
     try {
@@ -114,6 +131,28 @@ exports.deleteProduct = async (req, res, next) => {
             }
         });
         res.status(204).end();
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.deleteAllProducts = async (req, res, next) => {
+    try {
+        const allProducts = await Product.find({});
+
+        allProducts.forEach(product => {
+            const imagePath = product.productImage;
+            
+            fs.unlink(imagePath, (err) => {
+                if (err) {
+                    console.error('Error deleting image:', err);
+                }
+            });
+        });
+
+        await Product.deleteMany({});
+        
+        res.status(200).json({ message: 'All products and their images have been deleted' });
     } catch (error) {
         next(error);
     }

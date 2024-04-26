@@ -45,7 +45,11 @@ const productSchema = new mongoose.Schema({
     productImage: {
         type: String,
         required: true,
-    },    
+    },
+    contact: {
+        type: String,
+        required: true
+    }
 
 });
 

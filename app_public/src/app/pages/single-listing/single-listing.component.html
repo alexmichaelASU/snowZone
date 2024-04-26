@@ -1,0 +1,22 @@
+
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>{{ namer }}</mat-card-title>
+            <mat-card-subtitle>{{ manu }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="imager" [alt]="'Photo of ' + product.name">
+        <mat-card-content>
+            <p>Price: ${{ pricer }}.00</p>
+            <p>Size: {{ sizer }} cm</p>
+            <p>Color: {{ colorr }}</p>
+            <p>Condition: {{ con }}</p>
+            <p>Description: {{ desc }}</p>
+            <p>Clothing: {{ cont }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button routerLink="" routerLinkActive="active">BACK</button>
+        </mat-card-actions>
+    </mat-card>
+
+
