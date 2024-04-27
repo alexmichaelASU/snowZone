@@ -4,7 +4,7 @@
 CraigsList like used snow gear reseller
 
 
-" git clone -> npm start" 
+" git clone -> cd app_public -> ng build -> cd .. -> npm start" 
 for fully working website
 
 
