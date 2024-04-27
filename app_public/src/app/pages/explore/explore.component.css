@@ -1,0 +1,19 @@
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+}
+
+.example-card {
+    max-width: 300px;
+    margin: 20px;
+    
+    box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out; 
+    
+  }
+
+  .example-card:hover {
+    transform: scale(1.05);
+  }
+

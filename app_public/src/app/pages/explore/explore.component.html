@@ -1,1 +1,21 @@
-<p>explore works!</p>
+<div class="content">
+    <ng-container *ngFor="let product of products$ | async">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>{{ product.name }}</mat-card-title>
+                <mat-card-subtitle>{{ product.manufacturer }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="product.productImage" [alt]="'Photo of ' + product.name">
+            <mat-card-content>
+                <p>Price: ${{ product.price }}.00</p>
+                <p>Size: {{ product.size }} cm</p>
+                <p>Color: {{ product.color }}</p>
+                <p>Condition: {{ product.condition }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button >LIKE</button>
+                <button mat-button [routerLink]="['/single', product._id]" routerLinkActive="active">DETAILS</button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+</div>

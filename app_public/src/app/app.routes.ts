@@ -8,7 +8,7 @@ import { ClothingComponent } from './pages/clothing/clothing.component';
 import { UserComponent } from './pages/user/user.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
-
+import { ExploreComponent } from './pages/explore/explore.component';
 export const routes: Routes = [
     { path: 'main', component: MainComponent},
     { path: 'snowboards', component: SnowboardingComponent},
@@ -18,6 +18,7 @@ export const routes: Routes = [
     { path: 'clothing', component: ClothingComponent},
     { path: 'user', component: UserComponent},
     { path: 'signin', component: SigninComponent},
-    { path: 'signup', component: SignupComponent}
+    { path: 'signup', component: SignupComponent},
+    { path: 'explore', component: ExploreComponent}
 
 ];
