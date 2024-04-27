@@ -26,6 +26,10 @@ export class WebRequestService {
     return this.http.get<any[]>(`${this.ROOT_URL}/${uri}/${theme}`);
   }
 
+  get(uri: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/${uri}`);
+  }
+
   post(uri: String, payload: Object) {
     return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
   }

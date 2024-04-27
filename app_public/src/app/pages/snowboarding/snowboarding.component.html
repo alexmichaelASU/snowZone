@@ -11,9 +11,12 @@
                 </mat-expansion-panel-header>
                 <mat-form-field>
                     <mat-label>Manufacturer</mat-label>
-                    <mat-select>
+                    <mat-select [(ngModel)]="selectedManufacturer">
                         <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
                             {{ manufacturer }}
+                        </mat-option>
+                        <mat-option>
+                            none
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -21,9 +24,12 @@
                 <!-- Condition dropdown -->
                 <mat-form-field>
                     <mat-label>Condition</mat-label>
-                    <mat-select>
+                    <mat-select [(ngModel)]="selectedCondition">
                         <mat-option *ngFor="let condition of conditions" [value]="condition">
                             {{ condition }}
+                        </mat-option>
+                        <mat-option>
+                            none
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -31,9 +37,12 @@
                 <!-- Color dropdown -->
                 <mat-form-field>
                     <mat-label>Color</mat-label>
-                    <mat-select>
+                    <mat-select [(ngModel)]="selectedColor">
                         <mat-option *ngFor="let color of colors" [value]="color">
                             {{ color }}
+                        </mat-option>
+                        <mat-option>
+                            none
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -41,12 +50,24 @@
                 <!-- Size dropdown -->
                 <mat-form-field>
                     <mat-label>Size</mat-label>
-                    <mat-select>
+                    <mat-select [(ngModel)]="selectedSize">
                         <mat-option *ngFor="let size of sizes" [value]="size">
                             {{ size }}
                         </mat-option>
+                        <mat-option>
+                            none
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
+                
+                <!-- Filter button -->
+                <section>
+                    <div class="example-button-row">
+                        <button mat-button (click)="onFilterSubmit()">Filter Submit</button>
+                        <button mat-button (click)="ngOnInit()">Reset</button>
+                    </div>
+                </section>
+
             </mat-expansion-panel>
         </mat-accordion>
     </div>

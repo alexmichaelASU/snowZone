@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-snowboarding',
@@ -30,6 +32,8 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     RouterOutlet, 
     RouterLink, 
     RouterLinkActive,
+    FormsModule
+
   ],
   templateUrl: './snowboarding.component.html',
   styleUrls: ['./snowboarding.component.css']
@@ -40,30 +44,54 @@ export class SnowboardingComponent implements OnInit {
   conditions: string[] = [];
   colors: string[] = [];
   sizes: string[] = [];
-  
+
+  selectedManufacturer: string | undefined;
+  selectedCondition: string | undefined;
+  selectedColor: string | undefined;
+  selectedSize: string | undefined;
+
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    // Fetch the products for snowboarding
+    
     this.products$ = this.productService.getProductsByTheme('snowboarding');
     
-    // Subscribe to the observable and process the products
+  
     this.products$.subscribe(products => {
-      // Log the products to inspect the data
+   
       console.log(products);
 
-      // Extract unique values for each field
+      
       this.manufacturers = this.getUniqueValues(products, 'manufacturer');
       this.conditions = this.getUniqueValues(products, 'condition');
       this.colors = this.getUniqueValues(products, 'color');
       this.sizes = this.getUniqueValues(products, 'size');
-  });
-  }
-  
-  // Function to extract unique values from products based on a given property
-  getUniqueValues(products: any[], property: string): string[] {
-    const values = products.map(product => product[property]);
-    return Array.from(new Set(values)); // Use Set to remove duplicates and convert back to array
+    });
   }
 
+  
+  getUniqueValues(products: any[], property: string): string[] {
+    const values = products.map(product => product[property]);
+    return Array.from(new Set(values)); 
+  }
+
+  
+  onFilterSubmit(): void {
+    
+    const filters: any = {
+        manufacturer: this.selectedManufacturer,
+        condition: this.selectedCondition,
+        color: this.selectedColor,
+        size: this.selectedSize,
+    };
+
+    
+    Object.keys(filters).forEach(key => {
+        if (filters[key] === undefined) {
+            delete filters[key];
+        }
+    });
+
+    this.products$ = this.productService.getProductsByThemeAndFilters('snowboarding', filters);
+  }
 }

@@ -43,6 +43,49 @@ exports.getProductsByTheme = async (req, res, next) => {
     }
 };
 
+// Controller function to get products by a required theme and optional filters
+exports.getProductsByThemeAndFilters = async (req, res, next) => {
+    try {
+        // Extracting the theme from the URL parameters
+        const theme = req.params.theme;
+
+        // Extracting optional filters from query parameters
+        const manufacturer = req.query.manufacturer;
+        const condition = req.query.condition;
+        const color = req.query.color;
+        const size = req.query.size;
+
+        // Constructing the filter object based on provided parameters
+        const filters = { theme };
+        if (manufacturer) {
+            filters.manufacturer = manufacturer;
+        }
+        if (condition) {
+            filters.condition = condition;
+        }
+        if (color) {
+            filters.color = color;
+        }
+        if (size) {
+            filters.size = size;
+        }
+
+        // Querying the database for products that match the filters
+        const products = await Product.find(filters);
+
+        // If no products are found, return a 404 response
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found with the specified filters' });
+        }
+
+        // Respond with the list of products
+        res.status(200).json(products);
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 //Used for post request , creates a product
 exports.createProduct = async (req, res, next) => {
     try {

@@ -36,6 +36,7 @@ const upload = multer({
 
 
 router.get('/products/theme/:theme', apiController.getProductsByTheme);
+router.get('/products/theme/:theme/filters', apiController.getProductsByThemeAndFilters);
 router.get('/products', apiController.getAllProducts);
 router.get('/products/:id', apiController.getProductById);
 router.post('/products', upload.single('productImage'), apiController.createProduct);

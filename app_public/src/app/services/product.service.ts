@@ -55,6 +55,22 @@ export class ProductService {
   getProductsByTheme(theme: string): Observable<any[]> {
     return this.webReqService.getProductsByTheme1('api/products/theme',theme);
   }
+  getProductsByThemeAndFilters(theme: string, filters?: { [key: string]: string | undefined }): Observable<any[]> {
+    let queryParams = '';
+    if (filters) {
+        const queryParts = [];
+        for (const key in filters) {
+            if (filters[key]) {
+                queryParts.push(`${key}=${encodeURIComponent(filters[key]!)}`);
+            }
+        }
+        queryParams = queryParts.length > 0 ? '?' + queryParts.join('&') : '';
+    }
+
+    return this.webReqService.get(`api/products/theme/${theme}/filters${queryParams}`);
+}
+
+
 
   getAllProducts() {
     return this.webReqService.getAll('api/products');
