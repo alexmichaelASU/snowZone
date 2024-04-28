@@ -104,10 +104,7 @@ exports.createProduct = async (req, res, next) => {
         //responds with the saved product
         res.status(201).json(savedProduct);
     } catch (error) {
-        // handles unique constraint error for product name
-        if (error.code === 11000) {
-            return res.status(400).json({ message: 'Product name must be unique' });
-        }
+        
         next(error);
     }
 };

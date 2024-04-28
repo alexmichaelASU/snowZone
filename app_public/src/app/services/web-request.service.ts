@@ -30,12 +30,12 @@ export class WebRequestService {
     return this.http.get<any[]>(`${this.ROOT_URL}/${uri}`);
   }
 
-  post(uri: String, payload: Object) {
-    return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
+  post(uri: string, data: any): Observable<any> {
+    return this.http.post<any>(`${this.ROOT_URL}/${uri}`, data);
   }
 
-  put(uri: string, productId: string, payload: any) {
-    return this.http.put(`${this.ROOT_URL}/${uri}/${productId}`, payload);
+  put(uri: string, data: any): Observable<any> {
+    return this.http.put<any>(`${this.ROOT_URL}/${uri}`, data);
   }
 
   delete(uri: String): Observable<any> {

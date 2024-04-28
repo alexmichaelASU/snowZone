@@ -10,7 +10,6 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true,
     },
     condition: {
         type: String,
@@ -23,7 +22,7 @@ const productSchema = new mongoose.Schema({
         trim: true,
     },
     price: {
-        type: Number,
+        type: String,
 		required: true,
         trim: true,
     },
@@ -48,7 +47,8 @@ const productSchema = new mongoose.Schema({
     },
     contact: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     }
 
 });

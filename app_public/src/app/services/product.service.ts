@@ -12,40 +12,12 @@ export class ProductService {
       
   }
   
-  createProduct(productData: any, productImageFile: File): Observable<any> {
-    const formData = new FormData();
-
-    formData.append('theme', productData.theme);
-    formData.append('name', productData.name);
-    formData.append('condition', productData.condition);
-    formData.append('description', productData.description);
-    formData.append('price', productData.price.toString());
-    formData.append('manufacturer', productData.manufacturer);
-    formData.append('size', productData.size);
-    formData.append('color', productData.color);
-
-    if (productImageFile) {
-      formData.append('productImage', productImageFile);
-    }
-
-    return this.webReqService.post('api/products', formData);
+  createProduct(data: any): Observable<any> {
+    return this.webReqService.post('api/products', data);
   }
 
-
-  updateProduct(productId: string, updatedData: any, productImageFile?: File): Observable<any> {
-    const formData = new FormData();
-
-    for (const key in updatedData) {
-        if (updatedData.hasOwnProperty(key)) {
-            formData.append(key, updatedData[key]);
-        }
-    }
-
-    if (productImageFile) {
-        formData.append('productImage', productImageFile);
-    }
-    
-    return this.webReqService.put('api/products', productId, formData);
+  updateProduct(productId: string, data: any): Observable<any> {
+    return this.webReqService.put(`api/products/${productId}`, data);
   }
 
   getSingleProduct(productId: string) {

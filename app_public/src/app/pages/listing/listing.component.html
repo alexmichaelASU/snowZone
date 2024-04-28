@@ -1,56 +1,57 @@
-<p class="create">Create a New Listing!</p>
-<form class="listing-form">
-    <!-- Theme Input -->
+
+<form (submit)="onSubmit($event)" enctype="multipart/form-data" class="listing-form">
+    <p class="create">Create a New Listing!</p>
     <mat-form-field class="listing-full-width">
         <mat-label>Theme (Snowboard, Ski, Clothing)</mat-label>
-        <input matInput required name="theme" placeholder="Ex. Snowboard, Ski, Clothing">
+        <input matInput required name="theme" [(ngModel)]="theme" placeholder="Ex. Snowboard, Ski, Clothing">
     </mat-form-field>
 
-    <!-- Product Name Input -->
     <mat-form-field class="listing-full-width">
         <mat-label>Product Name</mat-label>
-        <input matInput required name="name" placeholder="Ex. Snowboard" unique>
+        <input matInput required name="name" [(ngModel)]="name" placeholder="Ex. Snowboard">
     </mat-form-field>
 
-    <!-- Condition Input -->
     <mat-form-field class="listing-full-width">
         <mat-label>Condition</mat-label>
-        <input matInput name="condition" placeholder="Ex. New, Used">
+        <input matInput name="condition" [(ngModel)]="condition" placeholder="Ex. New, Used">
     </mat-form-field>
 
-    <!-- Description Input -->
     <mat-form-field class="listing-full-width">
         <mat-label>Description</mat-label>
-        <textarea matInput name="description" placeholder="Ex. A great snowboard for beginners"></textarea>
+        <textarea matInput name="description" [(ngModel)]="description" placeholder="Ex. A great snowboard for beginners"></textarea>
     </mat-form-field>
 
-    <!-- Price Input -->
     <mat-form-field class="listing-full-width">
         <mat-label>Price</mat-label>
-        <input matInput type="number" required name="price" placeholder="Ex. 299.99">
+        <input matInput type="number" required name="price" [(ngModel)]="price" placeholder="Ex. 299.99">
     </mat-form-field>
 
-    <!-- Manufacturer Input -->
     <mat-form-field class="listing-full-width">
         <mat-label>Manufacturer</mat-label>
-        <input matInput required name="manufacturer" placeholder="Ex. Burton">
+        <input matInput required name="manufacturer" [(ngModel)]="manufacturer" placeholder="Ex. Burton">
     </mat-form-field>
 
-    <!-- Size Input -->
     <mat-form-field class="listing-full-width">
         <mat-label>Size</mat-label>
-        <input matInput required name="size" placeholder="Ex. Medium, Large">
+        <input matInput required name="size" [(ngModel)]="size" placeholder="Ex. Medium, Large">
     </mat-form-field>
 
-    <!-- Color Input -->
     <mat-form-field class="listing-full-width">
         <mat-label>Color</mat-label>
-        <input matInput required name="color" placeholder="Ex. Red, Blue">
+        <input matInput required name="color" [(ngModel)]="color" placeholder="Ex. Red, Blue">
     </mat-form-field>
 
+    <mat-form-field class="listing-full-width">
+        <mat-label>Contact</mat-label>
+        <input matInput required name="contact" [(ngModel)]="contact" placeholder="Ex. Your phone or email">
+    </mat-form-field>
+
+    <input type="file" class="form-control-file" (change)="onFileChange($event)" name="productImage">
+
+    <!-- redirect to single listing or user in future-->
     <section>
         <div class="example-button-row">
-            <button mat-button color="primary">Create!</button>
+            <button mat-button color="primary" type="submit">Create!</button>
         </div>
     </section>
 </form>
