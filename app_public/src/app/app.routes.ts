@@ -9,10 +9,11 @@ import { UserComponent } from './pages/user/user.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ExploreComponent } from './pages/explore/explore.component';
+import { authGuard } from './auth.guard';
 export const routes: Routes = [
     { path: 'main', component: MainComponent},
     { path: 'snowboards', component: SnowboardingComponent},
-    { path: 'listing', component: ListingComponent},
+    { path: 'listing', component: ListingComponent, canActivate: [authGuard],},
     { path: 'single/:id', component: SingleListingComponent},
     { path: 'skii', component: SkiingComponent}, 
     { path: 'clothing', component: ClothingComponent},

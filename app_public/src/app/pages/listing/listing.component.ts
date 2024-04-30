@@ -4,6 +4,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-listing',
   standalone: true,
@@ -11,13 +12,13 @@ import { ProductService } from '../../services/product.service';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatButton
+    MatButton,
   ],
   templateUrl: './listing.component.html',
   styleUrl: './listing.component.css'
 })
 export class ListingComponent {
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   theme: string = '';
   name: string = '';
@@ -53,7 +54,15 @@ export class ListingComponent {
     
     this.productService.createProduct(formData).subscribe(
         response => {
-            console.log('Product created successfully!', response);
+          console.log('Product created successfully!', response);
+          // Navigate to the appropriate route based on the theme
+          if (this.theme.toLowerCase() === 'snowboarding') {
+              this.router.navigate(['/snowboards']);
+          } else if (this.theme.toLowerCase() === 'skiing') {
+              this.router.navigate(['/skii']);
+          } else if (this.theme.toLowerCase() === 'clothing') {
+              this.router.navigate(['/clothing']);
+          }
             
         },
         error => {

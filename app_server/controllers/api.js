@@ -1,7 +1,28 @@
 const Product = require('../models/Product.js');
+const User = require('../models/user.js');
 const fs = require('fs');
 //used for uploading and storing images
 
+function getUser(req, res, callback) {
+    if (req.payload && req.payload.email) { 
+        User.findOne({ email: req.payload.email }) 
+            .exec((err, user) => {
+                console.log("result");
+                if (!user) {
+
+                    return res.status(404).json({ "message": "User not found" });
+
+                } else if (err) {
+
+                    console.log(err);
+                    return res.status(404).json(err);
+                }
+                callback(req, res, user.name); 
+            });
+    } else {
+        return res.status(404).json({ "message": "User not found" });
+    }
+};
 
 //Used for Get Request
 exports.getAllProducts = async (req, res, next) => {

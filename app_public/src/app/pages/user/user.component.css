@@ -1,0 +1,69 @@
+.main {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+.user-container {
+    color: white;
+    min-width: 150px;
+    max-width: 500px;
+    
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 5px; 
+    background: linear-gradient(to left, lightblue, #FFCCCB);
+    box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+.foo {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.custom-button {
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: white; 
+    color: black; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    letter-spacing: 1.5px;
+    
+}
+
+/* Hover effect for buttons */
+.custom-button:hover {
+    background: linear-gradient(to right, lightblue, #FFCCCB);
+}
+
+.wishlist {
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 5px; 
+    background: linear-gradient(to left, lightblue, #FFCCCB);
+    box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.example-card {
+    max-width: 400px;
+    padding: 20px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+    gap: 10px; /* Space between cards */
+}

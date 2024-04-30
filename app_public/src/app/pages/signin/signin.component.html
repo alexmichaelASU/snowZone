@@ -1,26 +1,26 @@
 <main>
-    <div class="wrapper">
-        <div class="title">
+   <div class="wrapper">
+       <div class="title">
            Login
-        </div>
-        <form action="#">
+       </div>
+       <form (ngSubmit)="login(form)" #form="ngForm">
            <div class="field">
-              <input type="text" required>
-              <label>Email Address</label>
+               <input type="text" name="email" ngModel required>
+               <label>Email Address</label>
            </div>
            <div class="field">
-              <input type="password" required>
-              <label>Password</label>
+               <input type="password" name="password" ngModel required>
+               <label>Password</label>
            </div>
            <div class="spacing">
               
            </div>
            <div class="field">
-              <input type="submit" value="Login">
+               <input type="submit" value="Login">
            </div>
            <div class="signup-link">
-              Not a member? <a class="button" routerLink="/signup" routerLinkActive="active">SignUp</a>
+               Not a member? <a class="button" routerLink="/signup" routerLinkActive="active">SignUp</a>
            </div>
-        </form>
-     </div>
-    </main>
+       </form>
+   </div>
+</main>

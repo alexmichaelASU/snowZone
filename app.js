@@ -1,16 +1,27 @@
 // app.js
-
+const passport = require('passport');
+require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
-
+require('./app_server/config/passport');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const User = require('./app_server/models/user');
 // Import routes
 const indexRouter = require('./app_server/routes/index');
 const apiRouter = require('./app_server/routes/api');
 
 const app = express();
+app.use(passport.initialize());
+
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+      res.status(401).json({ message: 'Unauthorized' });
+  } else {
+      console.error(err);
+      next(err);
+  }
+});
 
 // Database connection
 const connectDB = require('./app_server/models/db');
@@ -19,6 +30,7 @@ connectDB();
 //Import mongoose model
 const { Product } = require('./app_server/models/Product');
 
+ 
 // View engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'pug');
@@ -26,7 +38,7 @@ app.set('view engine', 'pug');
 // Middleware setup
 app.use(logger('dev'));
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'app_public', 'dist', 'snow-zone', 'browser')));
 
@@ -41,7 +53,11 @@ app.get('*', (req, res, next) => {
       next();
     }
   });
-
+  app.use('/api', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200'); 
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); 
+    next();
+  });
 // Error handler
 app.use(function(err, req, res, next) {
     // Set locals, only providing error in development

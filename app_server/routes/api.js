@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const apiController = require('../controllers/api');
+const ctrlAuth = require('../controllers/authentication');
+var { expressjwt: jwt } = require("express-jwt");
+
+const auth = jwt({
+    secret: process.env.JWT_SECRET,          
+    userProperty: 'payload',
+    algorithms: ['HS512']                  
+  });
 
 //used for uploading image
 const multer = require('multer');
@@ -43,5 +51,8 @@ router.post('/products', upload.single('productImage'), apiController.createProd
 router.put('/products/:id', upload.single('productImage'),  apiController.updateProduct);
 router.delete('/products/:id', apiController.deleteProduct);
 router.delete('/products', apiController.deleteAllProducts);
+router.get('/:email', ctrlAuth.getUserr)
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
 module.exports = router;
