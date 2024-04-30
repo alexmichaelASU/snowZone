@@ -173,6 +173,9 @@ exports.updateProduct = async (req, res, next) => {
     }
 };
 
+
+
+
 //Used for delete request, deletes a product by id
 exports.deleteProduct = async (req, res, next) => {
     try {

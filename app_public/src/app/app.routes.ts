@@ -10,6 +10,7 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ExploreComponent } from './pages/explore/explore.component';
 import { authGuard } from './auth.guard';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 export const routes: Routes = [
     { path: 'main', component: MainComponent},
     { path: 'snowboards', component: SnowboardingComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'user', component: UserComponent},
     { path: 'signin', component: SigninComponent},
     { path: 'signup', component: SignupComponent},
-    { path: 'explore', component: ExploreComponent}
+    { path: 'explore', component: ExploreComponent},
+    { path: '', component: HomePageComponent}
 
 ];

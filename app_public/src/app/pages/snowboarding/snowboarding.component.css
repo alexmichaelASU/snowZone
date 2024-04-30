@@ -7,8 +7,8 @@
 
 .content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
-    gap: 10px; /* Space between cards */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; 
 }
 
 .example-card {
