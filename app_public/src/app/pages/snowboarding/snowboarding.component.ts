@@ -94,4 +94,15 @@ export class SnowboardingComponent implements OnInit {
 
     this.products$ = this.productService.getProductsByThemeAndFilters('snowboarding', filters);
   }
+
+  addToWishlist(productId: string): void {
+    this.productService.createWishlistItem(productId).subscribe({
+        next: (response) => {
+            console.log('Added to wishlist:', response);
+        },
+        error: (error) => {
+            console.error('Error adding to wishlist:', error);
+        }
+    });
+}
 }

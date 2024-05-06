@@ -1,5 +1,7 @@
 const Product = require('../models/Product.js');
 const User = require('../models/user.js');
+const WishList = require('../models/Wishlist.js');
+
 const fs = require('fs');
 //used for uploading and storing images
 
@@ -63,6 +65,23 @@ exports.getProductsByTheme = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getProductsByContact = async (req, res, next) => {
+    try {
+        const contact = req.params.contact;
+
+        const products = await Product.find({ contact });
+
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found with the specified contact' });
+        }
+
+        res.status(200).json(products);
+    } catch (error) {
+        next(error);
+    }
+};
+
 
 // Controller function to get products by a required theme and optional filters
 exports.getProductsByThemeAndFilters = async (req, res, next) => {
@@ -217,6 +236,58 @@ exports.deleteAllProducts = async (req, res, next) => {
         await Product.deleteMany({});
         
         res.status(200).json({ message: 'All products and their images have been deleted' });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.createWishlistItem = async (req, res, next) => {
+    try {
+        const { email, productId } = req.body;
+
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        const newWishlistItem = new WishList({
+            email,
+            _productId: productId,
+        });
+
+        const savedWishlistItem = await newWishlistItem.save();
+        
+        res.status(201).json(savedWishlistItem);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Function to handle getting all wishlist items for a specific email
+exports.getWishlistByEmail = async (req, res, next) => {
+    try {
+        const email = req.params.email;
+
+        const wishlistItems = await WishList.find({ email });
+
+        res.status(200).json(wishlistItems);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Function to handle deleting a wishlist item by ID
+exports.deleteWishlistItem = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+
+        const deletedWishlistItem = await WishList.findByIdAndDelete(id);
+
+        if (!deletedWishlistItem) {
+            return res.status(404).json({ message: 'Wishlist item not found' });
+        }
+
+        res.status(204).end();
     } catch (error) {
         next(error);
     }

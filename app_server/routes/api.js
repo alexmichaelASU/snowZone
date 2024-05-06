@@ -2,14 +2,27 @@ const express = require('express');
 const router = express.Router();
 const apiController = require('../controllers/api');
 const ctrlAuth = require('../controllers/authentication');
-var { expressjwt: jwt } = require("express-jwt");
+const  jwt  = require('jsonwebtoken');
 
-const auth = jwt({
-    secret: process.env.JWT_SECRET,          
-    userProperty: 'payload',
-    algorithms: ['HS512']                  
-  });
 
+const auth = (req, res, next) => {
+    const token = req.headers.authorization;
+    
+    if (!token) {
+        return res.status(401).json({ error: 'Token error' });
+    }
+   
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            console.log(err);
+            return res.status(401).json({ error: 'Token invalid, authorization denied' });
+        }
+        
+        req.user = decoded;
+        
+        next();
+    });
+};
 //used for uploading image
 const multer = require('multer');
 
@@ -44,15 +57,20 @@ const upload = multer({
 
 
 router.get('/products/theme/:theme', apiController.getProductsByTheme);
+router.get('/products/contact/:contact', apiController.getProductsByContact);
 router.get('/products/theme/:theme/filters', apiController.getProductsByThemeAndFilters);
 router.get('/products', apiController.getAllProducts);
 router.get('/products/:id', apiController.getProductById);
-router.post('/products', upload.single('productImage'), apiController.createProduct);
-router.put('/products/:id', upload.single('productImage'),  apiController.updateProduct);
+router.post('/products', auth, upload.single('productImage'), apiController.createProduct);
+router.put('/products/:id', auth, upload.single('productImage'),  apiController.updateProduct);
 router.delete('/products/:id', apiController.deleteProduct);
 router.delete('/products', apiController.deleteAllProducts);
 router.get('/:email', ctrlAuth.getUserr)
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+
+router.post('/wishlist', apiController.createWishlistItem);
+router.get('/wishlist/:email', auth, apiController.getWishlistByEmail);
+router.delete('/wishlist/:id', auth, apiController.deleteWishlistItem);
 
 module.exports = router;

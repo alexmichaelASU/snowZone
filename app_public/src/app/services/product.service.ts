@@ -27,6 +27,16 @@ export class ProductService {
   getProductsByTheme(theme: string): Observable<any[]> {
     return this.webReqService.getProductsByTheme1('api/products/theme',theme);
   }
+
+  getProductsByContact(): Observable<any[]> {
+    const email = localStorage.getItem('email');
+
+    if (!email) {
+      throw new Error('Email not found in local storage.');
+    }
+    return this.webReqService.getProductsByTheme1('api/products/contact',email);
+  }
+  
   getProductsByThemeAndFilters(theme: string, filters?: { [key: string]: string | undefined }): Observable<any[]> {
     let queryParams = '';
     if (filters) {
@@ -51,4 +61,38 @@ export class ProductService {
   deleteProduct(productId: string): Observable<any> {
     return this.webReqService.delete(`api/products/${productId}`);
   }
+
+  deleteWish(wishListId: string): Observable<any> {
+    return this.webReqService.delete(`api/wishlist/${wishListId}`);
+  }
+
+
+  createWishlistItem(productId: string): Observable<any> {
+    const email = localStorage.getItem('email');
+
+    if (!email) {
+      throw new Error('Email not found in local storage.');
+    }
+
+    const data = {
+      email,
+      productId
+    };
+
+    return this.webReqService.post('api/wishlist', data);
+  }
+
+  getWishlistByEmail(): Observable<any[]> {
+    const email = localStorage.getItem('email');
+
+    if (!email) {
+      throw new Error('Email not found in local storage.');
+    }
+    return this.webReqService.get(`api/wishlist/${email}`);
+  }
+
+  deleteWishlistItem(id: string): Observable<any> {
+    return this.webReqService.delete(`api/wishlist/${id}`);
+  }
+
 }

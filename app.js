@@ -12,6 +12,20 @@ const indexRouter = require('./app_server/routes/index');
 const apiRouter = require('./app_server/routes/api');
 
 const app = express();
+
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+  );
+  next();
+});
+
 app.use(passport.initialize());
 
 app.use((err, req, res, next) => {
@@ -29,6 +43,7 @@ connectDB();
 
 //Import mongoose model
 const { Product } = require('./app_server/models/Product');
+const {WishList} = require('./app_server/models/Wishlist');
 
  
 // View engine setup
@@ -53,11 +68,7 @@ app.get('*', (req, res, next) => {
       next();
     }
   });
-  app.use('/api', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:4200'); 
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); 
-    next();
-  });
+ 
 // Error handler
 app.use(function(err, req, res, next) {
     // Set locals, only providing error in development
@@ -69,7 +80,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3007;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

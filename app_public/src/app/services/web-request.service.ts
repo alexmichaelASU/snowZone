@@ -12,11 +12,13 @@ export class WebRequestService {
 
   readonly ROOT_URL;
   TOKEN_KEY = "token";
+  EMAIL_KEY = "email";
+
   user: User | null = null;
   userListener: Subject<User | null> = new Subject();
-  API_URL = "http://localhost:3006/api/";
+  API_URL = "http://localhost:3007/api/";
   constructor(private http: HttpClient) {
-    this.ROOT_URL = 'http://localhost:3006';
+    this.ROOT_URL = 'http://localhost:3007';
     
    }
 
@@ -61,6 +63,7 @@ export class WebRequestService {
             else {
                 const token = response.token;
                 localStorage.setItem(this.TOKEN_KEY, token);
+                
                 this.user = response.user;
                 this.userListener.next(this.user);
             }
@@ -77,6 +80,7 @@ login({email, password}: {email: string, password: string}) {
                 console.log(response.error);
             } else {
                 const token = response.token;
+                localStorage.setItem(this.EMAIL_KEY, email);
                 localStorage.setItem(this.TOKEN_KEY, token);
                 this.user = response.user;
                 this.userListener.next(this.user);

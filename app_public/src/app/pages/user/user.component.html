@@ -21,7 +21,65 @@
                 
             </mat-expansion-panel-header>
             
-              
+            <div class="content">
+                <ng-container *ngFor="let product of wishProducts$ | async">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <mat-card-title>{{ product.name }}</mat-card-title>
+                            <mat-card-subtitle>{{ product.manufacturer }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image [src]="product.productImage" [alt]="'Photo of ' + product.name">
+                        <mat-card-content>
+                            <p>Price: ${{ product.price }}.00</p>
+                            <p>Size: {{ product.size }} cm</p>
+                            <p>Color: {{ product.color }}</p>
+                            <p>Condition: {{ product.condition }}</p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                        </mat-card-actions>
+                    </mat-card>
+                </ng-container>
+            </div>
+            
+        
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div class="wishlist">
+    <h2>Your Listings</h2>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Listings
+                </mat-panel-title>
+                
+            </mat-expansion-panel-header>
+            
+            <div class="content">
+                <ng-container *ngFor="let product of products$ | async">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <mat-card-title>{{ product.name }}</mat-card-title>
+                            <mat-card-subtitle>{{ product.manufacturer }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image [src]="product.productImage" [alt]="'Photo of ' + product.name">
+                        <mat-card-content>
+                            <p>Price: ${{ product.price }}.00</p>
+                            <p>Size: {{ product.size }} cm</p>
+                            <p>Color: {{ product.color }}</p>
+                            <p>Condition: {{ product.condition }}</p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button (click)="deletePro(product._id)">DELETE</button>
+                            <button mat-button>EDIT</button>
+                            <button mat-button [routerLink]="['/single', product._id]" routerLinkActive="active">DETAILS</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </ng-container>
+            </div>
+
         </mat-expansion-panel>
     </mat-accordion>
 </div>

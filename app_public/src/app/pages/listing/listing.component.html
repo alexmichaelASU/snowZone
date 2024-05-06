@@ -2,8 +2,8 @@
 <form (submit)="onSubmit($event)" enctype="multipart/form-data" class="listing-form">
     <p class="create">Create a New Listing!</p>
     <mat-form-field class="listing-full-width">
-        <mat-label>Theme (Snowboard, Ski, Clothing)</mat-label>
-        <input matInput required name="theme" [(ngModel)]="theme" placeholder="Ex. Snowboard, Ski, Clothing">
+        <mat-label>Theme (snowboarding, skiing, clothing)</mat-label>
+        <input matInput required name="theme" [(ngModel)]="theme" placeholder="Ex. snowboarding, skiing, clothing">
     </mat-form-field>
 
     <mat-form-field class="listing-full-width">
@@ -33,7 +33,7 @@
 
     <mat-form-field class="listing-full-width">
         <mat-label>Size</mat-label>
-        <input matInput required name="size" [(ngModel)]="size" placeholder="Ex. Medium, Large">
+        <input matInput required name="size" [(ngModel)]="size" placeholder="Ex. 120cm , 140 cm">
     </mat-form-field>
 
     <mat-form-field class="listing-full-width">
@@ -41,10 +41,6 @@
         <input matInput required name="color" [(ngModel)]="color" placeholder="Ex. Red, Blue">
     </mat-form-field>
 
-    <mat-form-field class="listing-full-width">
-        <mat-label>Contact</mat-label>
-        <input matInput required name="contact" [(ngModel)]="contact" placeholder="Ex. Your phone or email">
-    </mat-form-field>
 
     <input type="file" class="form-control-file" (change)="onFileChange($event)" name="productImage">
 

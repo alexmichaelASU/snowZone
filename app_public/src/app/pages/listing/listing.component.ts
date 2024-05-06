@@ -33,11 +33,11 @@ export class ListingComponent {
 
   
   onSubmit(event: Event) {
-    
     event.preventDefault();
 
-    
     const formData = new FormData();
+    
+    // Append form data
     formData.append('theme', this.theme);
     formData.append('name', this.name);
     formData.append('condition', this.condition);
@@ -46,33 +46,31 @@ export class ListingComponent {
     formData.append('manufacturer', this.manufacturer);
     formData.append('size', this.size);
     formData.append('color', this.color);
-    formData.append('contact', this.contact); 
+    
+    const emailFromLocalStorage = localStorage.getItem('email');
+    formData.append('contact', emailFromLocalStorage ?? ''); 
+
     if (this.uploadedFile) {
         formData.append('productImage', this.uploadedFile, this.uploadedFile.name);
     }
 
-    
     this.productService.createProduct(formData).subscribe(
         response => {
-          console.log('Product created successfully!', response);
-          // Navigate to the appropriate route based on the theme
-          if (this.theme.toLowerCase() === 'snowboarding') {
-              this.router.navigate(['/snowboards']);
-          } else if (this.theme.toLowerCase() === 'skiing') {
-              this.router.navigate(['/skii']);
-          } else if (this.theme.toLowerCase() === 'clothing') {
-              this.router.navigate(['/clothing']);
-          }
-            
+            console.log('Product created successfully!', response);
+            if (this.theme.toLowerCase() === 'snowboarding') {
+                this.router.navigate(['/snowboards']);
+            } else if (this.theme.toLowerCase() === 'skiing') {
+                this.router.navigate(['/skii']);
+            } else if (this.theme.toLowerCase() === 'clothing') {
+                this.router.navigate(['/clothing']);
+            }
         },
         error => {
             console.error('Error creating product:', error);
-            
         }
     );
 }
 
-  
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files) {

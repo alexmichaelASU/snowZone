@@ -88,4 +88,16 @@ export class SkiingComponent implements OnInit{
 
     this.products$ = this.productService.getProductsByThemeAndFilters('skiing', filters);
   }
+
+  addToWishlist(productId: string): void {
+    this.productService.createWishlistItem(productId).subscribe({
+        next: (response) => {
+            console.log('Added to wishlist:', response);
+        },
+        error: (error) => {
+            console.error('Error adding to wishlist:', error);
+        }
+    });
+}
+
 }
